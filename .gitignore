@@ -1,0 +1,28 @@
+# Binaries (The actual executable files)
+# This ignores any file named 'asciia' or ending in .exe
+asciia
+asciia.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test coverage files
+*.out
+*.test
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Project Specific (Asciia Save Files)
+# You might want to ignore the save file during development 
+# so you don't overwrite your personal character stats on GitHub.
+save.json
