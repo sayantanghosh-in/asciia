@@ -9,7 +9,6 @@ import (
 
 func GetTerminalDimensions() (rows int, cols int) {
 	// Get the file descriptor for standard output.
-	// You can also use os.Stdin.Fd() or os.Stderr.Fd().
 	fd := int(os.Stdout.Fd())
 
 	// Check if the file descriptor is a terminal.

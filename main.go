@@ -10,7 +10,7 @@ func main() {
 	for {
         // 2. Clear and Render
         fmt.Print("\033[H\033[2J")
-        // renderUI(rows, cols)
+        // @TODO - renderUI(rows, cols)
 		rows, cols := game.GetTerminalDimensions()
 
 		fmt.Print("\033[H\033[2J")
@@ -24,7 +24,7 @@ func main() {
 
         // 4. Exit Logic
         if input == "q" {
-            fmt.Println("Exiting Asciia... Goodbye, Hero!")
+            fmt.Println("Exiting Asciia... Goodbye!")
             break 
         }
 	}
