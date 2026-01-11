@@ -19,15 +19,15 @@ func drawHealthBars(player1Health int, player2Health int) {
 
 func drawCharacters() {
 	PrintEmptyLines(2)
-	var hero = heroStates["defeated"]
-	var monster = monsterStates["defeated"]
+	var hero = heroStates[idle]
+	var monster = monsterStates[defeated]
 	var characters strings.Builder
 
 	var heroLines = strings.Split(hero, "\n")
 	var monsterLines = strings.Split(monster, "\n")
 	for i := 0; i < len(heroLines); i++ {
 		characters.WriteString(heroLines[i])
-		const numberOfSpaces = len(characterGap) - characterWidth/2 + 2
+		const numberOfSpaces = len(characterGap) - characterWidth/2
 		for range numberOfSpaces {
 			characters.WriteString(" ")
 		}

@@ -18,10 +18,10 @@ func main() {
 
         // 2. Draw the Game
         game.DrawGame()
-        game.PrintEmptyLines(totalLinesWithoutHeaderAndFooter-7)
+        game.PrintEmptyLines(totalLinesWithoutHeaderAndFooter-6)
 
 		// 3. Wait for Input
-        input := game.PrintFooter()
+        input := game.DrawFooter()
 
         // 4. Exit Logic
         if input == "q" {

@@ -1,6 +1,9 @@
 package game
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 func DrawHeader(cols int) string {
 	var sb strings.Builder
@@ -13,4 +16,24 @@ func DrawHeader(cols int) string {
 	sb.WriteString(infoLine2)
 
 	return sb.String()
+}
+
+func PrintEmptyLines(numberOfLines int) {
+	for range numberOfLines  {
+		fmt.Println("")
+	}
+}
+
+func printDefaultFooter() string {
+	fmt.Print("Press 'q' to quit or 'Enter' to refresh: ")
+        var input string
+        fmt.Scanln(&input)
+
+		return input
+}
+
+func DrawFooter() string {
+	// @TODO implement full logic for dynamic footer
+	input := printDefaultFooter()
+	return input
 }

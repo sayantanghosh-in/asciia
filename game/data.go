@@ -14,31 +14,26 @@ const heroIdle = `
    [o]  
    /|\  
    / \  
-        
 `
 const heroAttack = `
    [>]  
    /|\⚡
-   / \  
-        
+   / \   
 `
 
 const heroHit = `
    [-]💢
    /|\  
    / \  
-        
 `
 
 const heroHeal = `
    [+]  
    /|\❤️
    / \  
-        
 `
 
-const heroDefeated = `
-   💀  
+const heroDefeated = `  
    _ _  
   [x_x] 
   /   \ 
@@ -47,42 +42,38 @@ const heroDefeated = `
 const monsterIdle = `
   /M\   
   (oo)  
-  /MM\  
-        
+  /MM\    
 `
 
 const monsterAttack = `
    /M\  
 💥(<<)   
-  /MM\  
-        
+  /MM\    
 `
 
 const monsterHit = `
  💢/M\   
    (--) 
-   /MM\  
-         
+   /MM\    
 `
 
 const monsterDefeated = `
         
-    💀  
    _xx_ 
   /____\
 `
 
-var heroStates = map[string]string{
-	"idle":     heroIdle,
-	"attack":   heroAttack,
-	"hit":      heroHit,
-	"heal":     heroHeal,
-	"defeated": heroDefeated,
+var heroStates = map[CharacterState]string{
+	idle:     heroIdle,
+	attack:   heroAttack,
+	hit:      heroHit,
+	heal:     heroHeal,
+	defeated: heroDefeated,
 }
 
-var monsterStates = map[string]string{
-	"idle":     monsterIdle,
-	"attack":   monsterAttack,
-	"hit":      monsterHit,
-	"defeated": monsterDefeated,
+var monsterStates = map[CharacterState]string{
+	idle:     monsterIdle,
+	attack:   monsterAttack,
+	hit:      monsterHit,
+	defeated: monsterDefeated,
 }
