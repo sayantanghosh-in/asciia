@@ -27,8 +27,27 @@ func GetTerminalDimensions() (rows int, cols int) {
 	return rows, cols
 }
 
+func GetTotalLinesWithoutHeaderAndFooter() (lines int) {
+	rows, _ := GetTerminalDimensions()
+	return rows - 9
+}
+
 func PrintEmptyLines(numberOfLines int) {
 	for range numberOfLines  {
 		fmt.Println("")
 	}
+}
+
+func printDefaultFooter() string {
+	fmt.Print("Press 'q' to quit or 'Enter' to refresh: ")
+        var input string
+        fmt.Scanln(&input)
+
+		return input
+}
+
+func PrintFooter() string {
+	// @TODO implement full logic for dynamic footer
+	input := printDefaultFooter()
+	return input
 }
