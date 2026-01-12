@@ -17,10 +17,10 @@ func drawHealthBars(player1Health int, player2Health int) {
 	fmt.Print(healthBars.String())
 }
 
-func drawCharacters() {
+func drawCharacters(gameData GameData) {
 	PrintEmptyLines(2)
-	var hero = heroStates[idle]
-	var monster = monsterStates[defeated]
+	var hero = heroStates[gameData.Player.State]
+	var monster = monsterStates[gameData.Monster.State]
 	var characters strings.Builder
 
 	var heroLines = strings.Split(hero, "\n")
@@ -37,7 +37,29 @@ func drawCharacters() {
 	fmt.Print(characters.String())
 }
 
-func DrawGame() {
-	drawCharacters()
-	drawHealthBars(100, 80)
+func DrawGame(gameData GameData) {
+	totalLinesWithoutHeaderAndFooter := GetTotalLinesWithoutHeaderAndFooter()
+	
+	// render to the screen
+	
+	switch gameData.State {
+		case Init: {
+			// TODO
+			fmt.Print("\nGame INIT")
+			PrintEmptyLines(4)
+			break;
+		}
+		case InGame:
+		case Over: {
+			drawCharacters(gameData)
+				drawHealthBars(gameData.Player.CurrentHP, gameData.Monster.CurrentHP)
+				break
+		}
+		default: {
+			fmt.Print("Invalid Game State: Please raise in an issue in Github project: https://github.com/sayantanghosh-in/asciia")
+		}
+	}
+    
+	// render empty lines after the game screen content is loaded
+	PrintEmptyLines(totalLinesWithoutHeaderAndFooter-fixedLinesPerGameState[gameData.State])
 }

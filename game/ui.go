@@ -32,8 +32,10 @@ func printDefaultFooter() string {
 		return input
 }
 
-func DrawFooter() string {
-	// @TODO implement full logic for dynamic footer
-	input := printDefaultFooter()
-	return input
+func DrawFooter(gameData GameData) string {
+	var userInput string
+	if gameData.State == Init || gameData.State == Over {
+		userInput = printDefaultFooter()
+	}
+	return userInput
 }

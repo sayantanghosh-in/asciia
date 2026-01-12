@@ -10,6 +10,18 @@ const asciiaTitleText string = `
 const characterGap = "          "
 const characterWidth = 8
 
+/*
+ * map to figure out easily how many lines the game will atleast take per game state.
+ * more lines for logs and other things will be added to this
+ * this is necessary to calculate the number of empty lines to render after the game content
+ * and before the footer
+ */
+var fixedLinesPerGameState map[GameState]int = map[GameState]int{
+	Init:   5, // @TODO - we will figure this out when we implement the idle state
+	InGame: 7,
+	Over:   7, // Same screen as InGame will be shown
+}
+
 const heroIdle = `
    [o]  
    /|\  
@@ -64,16 +76,16 @@ const monsterDefeated = `
 `
 
 var heroStates = map[CharacterState]string{
-	idle:     heroIdle,
-	attack:   heroAttack,
-	hit:      heroHit,
-	heal:     heroHeal,
-	defeated: heroDefeated,
+	Idle:     heroIdle,
+	Attack:   heroAttack,
+	Hit:      heroHit,
+	Heal:     heroHeal,
+	Defeated: heroDefeated,
 }
 
 var monsterStates = map[CharacterState]string{
-	idle:     monsterIdle,
-	attack:   monsterAttack,
-	hit:      monsterHit,
-	defeated: monsterDefeated,
+	Idle:     monsterIdle,
+	Attack:   monsterAttack,
+	Hit:      monsterHit,
+	Defeated: monsterDefeated,
 }
