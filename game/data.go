@@ -7,6 +7,18 @@ const asciiaTitleText string = `
 (__)(__)(___/ \___)(____)(____)(__)(__)
 `
 
+const introScreenText = `
+[ SYSTEM BOOT SEQUENCE ]
+> Checking Kernel....... OK
+> Loading Assets........ OK
+> Connecting to Grid.... SUCCESS
+
+WARNING: Glitch Entities Detected.
+Protocol: ELIMINATE.
+
+[ PRESS ENTER TO INITIALIZE ]
+`
+
 const characterGap = "          "
 const characterWidth = 8
 
@@ -17,7 +29,7 @@ const characterWidth = 8
  * and before the footer
  */
 var fixedLinesPerGameState map[GameState]int = map[GameState]int{
-	Init:   5, // @TODO - we will figure this out when we implement the idle state
+	Init:   11,
 	InGame: 7,
 	Over:   7, // Same screen as InGame will be shown
 }

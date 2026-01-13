@@ -6,6 +6,11 @@ import (
 	"strings"
 )
 
+func drawIntro() {
+    PrintEmptyLines(2)
+    fmt.Print(introScreenText)
+}
+
 func drawHealthBars(player1Health int, player2Health int) {
 	var healthBars strings.Builder
 	healthBars.WriteString("  ")
@@ -44,9 +49,7 @@ func DrawGame(gameData GameData) {
 	
 	switch gameData.State {
 		case Init: {
-			// TODO
-			fmt.Print("\nGame INIT")
-			PrintEmptyLines(4)
+			drawIntro()
 			break;
 		}
 		case InGame:
