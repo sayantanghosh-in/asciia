@@ -46,8 +46,10 @@ func main() {
 
         // 4. Exit Logic
         if input == "q" {
-            fmt.Println("Exiting Asciia... Goodbye!")
+            fmt.Println("\nExiting Asciia... Goodbye!")
             break 
+        } else if input == "s" {
+            gameData.State = game.InGame
         }
 	}
 }

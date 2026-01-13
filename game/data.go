@@ -16,7 +16,7 @@ const introScreenText = `
 WARNING: Glitch Entities Detected.
 Protocol: ELIMINATE.
 
-[ PRESS ENTER TO INITIALIZE ]
+[ PRESS "s" TO INITIALIZE ]
 `
 
 const characterGap = "          "

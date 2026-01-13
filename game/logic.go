@@ -52,8 +52,7 @@ func DrawGame(gameData GameData) {
 			drawIntro()
 			break;
 		}
-		case InGame:
-		case Over: {
+		case InGame, Over: {
 			drawCharacters(gameData)
 				drawHealthBars(gameData.Player.CurrentHP, gameData.Monster.CurrentHP)
 				break

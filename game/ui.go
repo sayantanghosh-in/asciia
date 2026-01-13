@@ -2,7 +2,10 @@ package game
 
 import (
 	"fmt"
+	"os"
 	"strings"
+
+	"golang.org/x/term"
 )
 
 func DrawHeader(cols int) string {
@@ -24,18 +27,55 @@ func PrintEmptyLines(numberOfLines int) {
 	}
 }
 
+// readInput waits for a single keystroke and returns it immediately.
+func readInput() string {
+    // 1. Get File Descriptor
+    fd := int(os.Stdin.Fd())
+
+    // 2. Switch to Raw Mode (Disables Enter requirement, line editing, etc.)
+    oldState, err := term.MakeRaw(fd)
+    if err != nil {
+        return ""
+    }
+    
+    // 3. IMPORTANT: Ensure we restore the terminal when this function ends
+    // If we don't do this, the user's terminal will look broken after the game.
+    defer term.Restore(fd, oldState)
+
+    // 4. Read exactly one byte
+    b := make([]byte, 1)
+    os.Stdin.Read(b)
+
+    return string(b)
+}
+
 func printDefaultFooter() string {
-	fmt.Print("Press 'q' to quit or 'Enter' to refresh: ")
+	fmt.Print("Press 'q' to quit: ")
         var input string
-        fmt.Scanln(&input)
+       	input = readInput()
+
+		return input
+}
+
+func printInitFooter() string {
+	fmt.Print("Press 's' to start the game or 'q' to quit: ")
+        var input string
+       	input = readInput()
 
 		return input
 }
 
 func DrawFooter(gameData GameData) string {
 	var userInput string
-	if gameData.State == Init || gameData.State == Over {
-		userInput = printDefaultFooter()
+	switch gameData.State {
+		case Init: {
+			userInput = printInitFooter()
+			break
+		}
+		case InGame, Over: {
+			userInput = printDefaultFooter()
+			break
+		}
 	}
 	return userInput
 }
