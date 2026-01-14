@@ -44,12 +44,16 @@ func main() {
 		// 3. Wait for Input
         input := game.DrawFooter(gameData)
 
-        // 4. Exit Logic
+        // 4. Handle user inputs
         if input == "q" {
             fmt.Println("\nExiting Asciia... Goodbye!")
             break 
         } else if input == "s" {
-            gameData.State = game.InGame
+            if (gameData.State == game.Init || gameData.State == game.Over) {
+                gameData.State = game.InGame
+            }
+        } else if gameData.State == game.InGame {
+            game.HandleInGameKeys(input)
         }
 	}
 }
