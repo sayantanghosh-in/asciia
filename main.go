@@ -53,7 +53,7 @@ func main() {
                 gameData.State = game.InGame
             }
         } else if gameData.State == game.InGame {
-            game.HandleInGameKeys(input)
+            game.HandleInGameKeys(gameData, input)
         }
 	}
 }

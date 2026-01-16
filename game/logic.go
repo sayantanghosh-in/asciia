@@ -2,6 +2,15 @@ package game
 
 import "fmt"
 
+func attack(p1 Character, p2 Character) {
+	/**
+	* Function to simulate p1 attacking p2
+	* A random HP between 10-20 will be deducted.
+	* This function will mutate the characters in the state
+	*/
+	fmt.Println(p1.Name + " attacked " + p2.Name)
+}
+
 func DrawGame(gameData GameData) {
 	totalLinesWithoutHeaderAndFooter := GetTotalLinesWithoutHeaderAndFooter()
 	
@@ -26,10 +35,11 @@ func DrawGame(gameData GameData) {
 	PrintEmptyLines(totalLinesWithoutHeaderAndFooter-fixedLinesPerGameState[gameData.State])
 }
 
-func HandleInGameKeys(key string) {
+func HandleInGameKeys(gameData GameData, key string) {
 	switch key {
         case "a": {
         	// attack
+			attack(gameData.Player, gameData.Monster)
 		}
 		case "h": {
 			// heal
