@@ -34,7 +34,7 @@ func printDefaultFooter() string {
 }
 
 func printInGameFooter() string {
-	fmt.Print("Press 'a' to attack, 'h' to heal or 'q' to quit: ")
+	fmt.Print("Press 'a' to attack; 'h' to heal; 'r' to restart; 'q' to quit")
         var input string
        	input = readInput()
 

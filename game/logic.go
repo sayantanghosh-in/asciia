@@ -26,10 +26,17 @@ func attack(gameData *GameData) {
 			hpToReduce := calculateAttackHpReductionQuantity()
 			reducedHp := gameData.Monster.CurrentHP - hpToReduce
 			gameData.Monster.CurrentHP = max(0, reducedHp)
+			// updating player states
+			gameData.Player.State = Attack
+			gameData.Monster.State = Hit
+			// updating game turn
 			gameData.Turn = 2
+			// updating last move
 			gameData.lastMove = "You attacked Monster. Monster: -" + strconv.Itoa(hpToReduce) + "HP"
+			// checking if game is over
 			if gameData.Monster.CurrentHP == 0 {
 				gameData.State = Over
+				gameData.Monster.State = Defeated
 				gameData.lastMove = "You won!!!"
 			}
 			break
@@ -40,10 +47,17 @@ func attack(gameData *GameData) {
 			hpToReduce := calculateAttackHpReductionQuantity()
 			reducedHp := gameData.Player.CurrentHP - hpToReduce
 			gameData.Player.CurrentHP = max(0, reducedHp)
+			// updating player states
+			gameData.Monster.State = Attack
+			gameData.Player.State = Hit
+			// updating game turn
 			gameData.Turn = 1
+			// updating last move
 			gameData.lastMove = "Monster attacked You. Player: -" + strconv.Itoa(hpToReduce) + "HP"
+			// checking if game is over
 			if gameData.Player.CurrentHP == 0 {
 				gameData.State = Over
+				gameData.Monster.State = Defeated
 				gameData.lastMove = "You Lost :("
 			}
 			break

@@ -50,6 +50,12 @@ func main() {
             fmt.Println("\nExiting Asciia... Goodbye!")
             break 
         } 
+
+        // if user presses 'r' in the InGame state, restart the game
+        if gameData.State == game.InGame && input == "r" {
+            gameData = initialize()
+            gameData.State = game.InGame
+        }
         
         // for Init and Over states, handle the start 's' event
         if gameData.State == game.Init || gameData.State == game.Over {
