@@ -116,3 +116,8 @@ func drawCharacters(gameData GameData) {
 	}
 	fmt.Print(characters.String())
 }
+
+func drawLastMove(lastMove string) {
+	PrintEmptyLines(2)
+	fmt.Print(lastMove)
+}

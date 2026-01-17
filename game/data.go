@@ -30,8 +30,8 @@ const characterWidth = 8
  */
 var fixedLinesPerGameState map[GameState]int = map[GameState]int{
 	Init:   11,
-	InGame: 8,
-	Over:   8, // Same screen as InGame will be shown
+	InGame: 10,
+	Over:   10, // Same screen as InGame will be shown
 }
 
 const heroIdle = `
