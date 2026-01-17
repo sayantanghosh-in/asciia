@@ -12,7 +12,7 @@ func calculateAttackHpReductionQuantity() int {
 	return min + rand.IntN(max-min+1)
 }
 
-func attack(gameData GameData) {
+func attack(gameData *GameData) {
 	/**
 	* Function to simulate player 1 attacking player 2
 	* Currently player 1 means the current player and player 2 is the monster
@@ -25,13 +25,13 @@ func attack(gameData GameData) {
 			// reducing the hp of the player 2
 			hpToReduce := calculateAttackHpReductionQuantity()
 			reducedHp := gameData.Monster.CurrentHP - hpToReduce
-			if reducedHp < 0 {
-				gameData.Monster.CurrentHP = 0
-			} else {
-				gameData.Monster.CurrentHP = reducedHp
-			}
+			gameData.Monster.CurrentHP = max(0, reducedHp)
 			gameData.Turn = 2
-			gameData.lastMove = "Player 1 attacked Monster. Monster: -" + strconv.Itoa(hpToReduce) + "HP"
+			gameData.lastMove = "You attacked Monster. Monster: -" + strconv.Itoa(hpToReduce) + "HP"
+			if gameData.Monster.CurrentHP == 0 {
+				gameData.State = Over
+				gameData.lastMove = "You won!!!"
+			}
 			break
 		} 
 		case 2: {
@@ -39,20 +39,19 @@ func attack(gameData GameData) {
 			// reducing the hp of the player 1
 			hpToReduce := calculateAttackHpReductionQuantity()
 			reducedHp := gameData.Player.CurrentHP - hpToReduce
-			if reducedHp < 0 {
-				gameData.Player.CurrentHP = 0
-			} else {
-				gameData.Player.CurrentHP = reducedHp
-			}
+			gameData.Player.CurrentHP = max(0, reducedHp)
 			gameData.Turn = 1
-			gameData.lastMove = "Monster attacked Player 1. Player: -" + strconv.Itoa(hpToReduce) + "HP"
+			gameData.lastMove = "Monster attacked You. Player: -" + strconv.Itoa(hpToReduce) + "HP"
+			if gameData.Player.CurrentHP == 0 {
+				gameData.State = Over
+				gameData.lastMove = "You Lost :("
+			}
 			break
 		}
 	}
-	DrawGame(gameData)
 }
 
-func DrawGame(gameData GameData) {
+func DrawGame(gameData *GameData) {
 	totalLinesWithoutHeaderAndFooter := GetTotalLinesWithoutHeaderAndFooter()
 	
 	// render to the screen
@@ -77,7 +76,7 @@ func DrawGame(gameData GameData) {
 	PrintEmptyLines(totalLinesWithoutHeaderAndFooter-fixedLinesPerGameState[gameData.State])
 }
 
-func HandleInGameKeys(gameData GameData, key string) {
+func HandleInGameKeys(gameData *GameData, key string) {
 	switch key {
         case "a": {
         	// attack

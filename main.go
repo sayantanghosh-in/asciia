@@ -39,21 +39,29 @@ func main() {
 		fmt.Print(game.DrawHeader(cols))
 
         // 2. Draw the Game
-        game.DrawGame(gameData)
+        game.DrawGame(&gameData)
 
 		// 3. Wait for Input
-        input := game.DrawFooter(gameData)
+        input := game.DrawFooter(&gameData)
 
         // 4. Handle user inputs
+        // if user presses 'q' end the game irrespective of what state they are in
         if input == "q" {
             fmt.Println("\nExiting Asciia... Goodbye!")
             break 
-        } else if input == "s" {
-            if (gameData.State == game.Init || gameData.State == game.Over) {
-                gameData.State = game.InGame
+        } 
+        
+        // for Init and Over states, handle the start 's' event
+        if gameData.State == game.Init || gameData.State == game.Over {
+            if input == "s" {
+                if (gameData.State == game.Init || gameData.State == game.Over) {
+                    gameData = initialize()
+                    gameData.State = game.InGame
+                }
             }
-        } else if gameData.State == game.InGame {
-            game.HandleInGameKeys(gameData, input)
+        } else {
+                // for InGame state, handle the in-game keys
+                game.HandleInGameKeys(&gameData, input)
         }
 	}
 }

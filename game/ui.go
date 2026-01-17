@@ -2,11 +2,8 @@ package game
 
 import (
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
-
-	"golang.org/x/term"
 )
 
 func DrawHeader(cols int) string {
@@ -28,52 +25,34 @@ func PrintEmptyLines(numberOfLines int) {
 	}
 }
 
-// readInput waits for a single keystroke and returns it immediately.
-func readInput() string {
-    // 1. Get File Descriptor
-    fd := int(os.Stdin.Fd())
-
-    // 2. Switch to Raw Mode (Disables Enter requirement, line editing, etc.)
-    oldState, err := term.MakeRaw(fd)
-    if err != nil {
-        return ""
-    }
-    
-    // 3. IMPORTANT: Ensure we restore the terminal when this function ends
-    // If we don't do this, the user's terminal will look broken after the game.
-    defer term.Restore(fd, oldState)
-
-    // 4. Read exactly one byte
-    b := make([]byte, 1)
-    os.Stdin.Read(b)
-
-    return string(b)
-}
-
 func printDefaultFooter() string {
-	fmt.Print("Press 'q' to quit: ")
+	fmt.Print("Press 's' to start a new game or 'q' to quit: ")
         var input string
        	input = readInput()
 
 		return input
 }
 
-func printInitFooter() string {
-	fmt.Print("Press 's' to start the game or 'q' to quit: ")
+func printInGameFooter() string {
+	fmt.Print("Press 'a' to attack, 'h' to heal or 'q' to quit: ")
         var input string
        	input = readInput()
 
 		return input
 }
 
-func DrawFooter(gameData GameData) string {
+func DrawFooter(gameData *GameData) string {
 	var userInput string
 	switch gameData.State {
-		case Init: {
-			userInput = printInitFooter()
+		case Init, Over: {
+			userInput = printDefaultFooter()
 			break
 		}
-		case InGame, Over: {
+		case InGame: {
+			userInput = printInGameFooter()
+			break
+		}
+		default: {
 			userInput = printDefaultFooter()
 			break
 		}
@@ -97,7 +76,7 @@ func drawHealthBars(player1Health int, player2Health int) {
 	fmt.Print(healthBars.String())
 }
 
-func drawCharacters(gameData GameData) {
+func drawCharacters(gameData *GameData) {
 	PrintEmptyLines(2)
 	var hero = heroStates[gameData.Player.State]
 	var monster = monsterStates[gameData.Monster.State]
