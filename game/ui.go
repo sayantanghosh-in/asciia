@@ -33,12 +33,20 @@ func printDefaultFooter() string {
 		return input
 }
 
-func printInGameFooter() string {
-	fmt.Print("Press 'a' to attack; 'h' to heal; 'r' to restart; 'q' to quit")
-        var input string
-       	input = readInput()
+func printInGameFooter(gameData *GameData) string {
+	switch gameData.Turn {
+		case 1: {
+			fmt.Print("Press 'a' to attack; 'h' to heal; 'r' to restart; 'q' to quit")
+		}
+		case 2: {
+			// TODO - this will be replaced with an automatic Monster move
+			fmt.Print("Press 'a' to attack; 'r' to restart; 'q' to quit")
+		}
+	}
+    var input string
+    input = readInput()
 
-		return input
+	return input
 }
 
 func DrawFooter(gameData *GameData) string {
@@ -49,7 +57,7 @@ func DrawFooter(gameData *GameData) string {
 			break
 		}
 		case InGame: {
-			userInput = printInGameFooter()
+			userInput = printInGameFooter(gameData)
 			break
 		}
 		default: {

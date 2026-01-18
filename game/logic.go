@@ -57,12 +57,26 @@ func attack(gameData *GameData) {
 			// checking if game is over
 			if gameData.Player.CurrentHP == 0 {
 				gameData.State = Over
-				gameData.Monster.State = Defeated
+				gameData.Player.State = Defeated
 				gameData.lastMove = "You Lost :("
 			}
 			break
 		}
 	}
+}
+
+func heal(gameData *GameData) {
+	/**
+	* Function to simulate player 1 taking a heal
+	* Currently only player 1 can heal
+	* Healing is only possible 1 time
+	* Healing increases HP of player 1 by a fixed amount = 15HP
+	*/
+	gameData.Player.CurrentHP = min(gameData.Player.CurrentHP + 15, 100)
+	gameData.Turn = 2
+	gameData.Player.State = Heal
+	gameData.Monster.State = Idle
+	gameData.lastMove = "You healed yourself: +15HP"
 }
 
 func DrawGame(gameData *GameData) {
@@ -98,6 +112,7 @@ func HandleInGameKeys(gameData *GameData, key string) {
 		}
 		case "h": {
 			// heal
+			heal(gameData)
 		}
 	}
 }

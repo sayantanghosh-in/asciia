@@ -27,9 +27,10 @@ type Character struct {
 
 // GameData holds the entire "snapshot" of the current game
 type GameData struct {
-	Player   Character
-	Monster  Character
-	Turn     int // 1 means Hero, 2 means player 2 (monster)
-	lastMove string
-	State    GameState
+	Player       Character
+	Monster      Character
+	Turn         int // 1 means Hero, 2 means player 2 (monster)
+	lastMove     string
+	State        GameState
+	healUtilised bool // only 1 heal is possible for player 1
 }
