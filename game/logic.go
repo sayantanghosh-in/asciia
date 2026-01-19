@@ -32,12 +32,12 @@ func attack(gameData *GameData) {
 			// updating game turn
 			gameData.Turn = 2
 			// updating last move
-			gameData.lastMove = "You attacked Monster. Monster: -" + strconv.Itoa(hpToReduce) + "HP"
+			gameData.LastMove = "You attacked Monster. Monster: -" + strconv.Itoa(hpToReduce) + "HP"
 			// checking if game is over
 			if gameData.Monster.CurrentHP == 0 {
 				gameData.State = Over
 				gameData.Monster.State = Defeated
-				gameData.lastMove = "You won!!!"
+				gameData.LastMove = "You won!!!"
 			}
 			break
 		} 
@@ -53,12 +53,12 @@ func attack(gameData *GameData) {
 			// updating game turn
 			gameData.Turn = 1
 			// updating last move
-			gameData.lastMove = "Monster attacked You. Player: -" + strconv.Itoa(hpToReduce) + "HP"
+			gameData.LastMove = "Monster attacked You. Player: -" + strconv.Itoa(hpToReduce) + "HP"
 			// checking if game is over
 			if gameData.Player.CurrentHP == 0 {
 				gameData.State = Over
 				gameData.Player.State = Defeated
-				gameData.lastMove = "You Lost :("
+				gameData.LastMove = "You Lost :("
 			}
 			break
 		}
@@ -76,7 +76,7 @@ func heal(gameData *GameData) {
 	gameData.Turn = 2
 	gameData.Player.State = Heal
 	gameData.Monster.State = Idle
-	gameData.lastMove = "You healed yourself: +15HP"
+	gameData.LastMove = "You healed yourself: +15HP"
 }
 
 func DrawGame(gameData *GameData) {
@@ -92,7 +92,7 @@ func DrawGame(gameData *GameData) {
 		case InGame, Over: {
 			drawCharacters(gameData)
 			drawHealthBars(gameData.Player.CurrentHP, gameData.Monster.CurrentHP)
-			drawLastMove(gameData.lastMove)
+			drawLastMove(gameData.LastMove)
 			break
 		}
 		default: {

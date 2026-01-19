@@ -22,6 +22,8 @@ func initialize() game.GameData {
         },
         Turn: 1,
         State: game.Init,
+        LastMove: "",
+        HealUtilised: false,
     }
 }
 
