@@ -59,16 +59,14 @@ func main() {
             gameData.State = game.InGame
         }
         
-        // for Init and Over states, handle the start 's' event
+        // for Init and Over states, only handle the start 's' event
         if gameData.State == game.Init || gameData.State == game.Over {
             if input == "s" {
-                if (gameData.State == game.Init || gameData.State == game.Over) {
-                    gameData = initialize()
-                    gameData.State = game.InGame
-                }
+                gameData = initialize()
+                gameData.State = game.InGame
             }
         } else {
-                // for InGame state, handle the in-game keys
+                // for InGame state, handle the other in-game keys
                 game.HandleInGameKeys(&gameData, input)
         }
 	}
