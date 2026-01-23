@@ -1,3 +1,3 @@
 # ASCIIA
 
-This is my pet project created using Golang!
+This is a hobby project I am creating using Golang!
